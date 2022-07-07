@@ -1,0 +1,17 @@
+html {
+  font-size: 87.5%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 100%;
+  }
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
