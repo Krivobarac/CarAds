@@ -20,5 +20,10 @@ namespace CarAds.Controllers
         //    }
         //    else { return View(); }
         //}
+
+        public IActionResult Error404()
+        {
+            return View();
+        }
     }
 }
