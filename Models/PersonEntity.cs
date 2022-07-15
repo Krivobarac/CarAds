@@ -2,6 +2,9 @@
 {
     public class PersonEntity
     {
-        public string Phone { get; set; }
+        public int Id { get; set; }
+        public string? Phone { get; set; }
+        public byte? IsDeleted { get; set; }
+        public virtual List<CarEntity>? Cars { get; set; }
     }
 }

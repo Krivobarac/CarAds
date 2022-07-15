@@ -1,0 +1,23 @@
+﻿@inject CarAds.Managers.CarManager carManager
+
+<h2>Number of cars</h2>
+<p>@carManager.GetCars().Count()</p>
+
+<div class="container p-0">
+    <div class="row">
+    @foreach (var car in @carManager.GetCars())
+    {
+        <div class="col-6 col-sm-6 col-lg-4 col-xl-3 pb-4">
+            <div class="card" style="height: 25rem">
+              <img class="card-img-top bg-dark" src="" alt="Car image" style="height: 100%; width: 100%">
+              <div class="card-body d-flex flex-column">
+                <h4 class="card-title mb-2">@car.Brand @car.Model</h4>
+                <p class="card-text mb-2">@car.Year</p>
+                <p class="card-text mb-2">$@car.Price</p>
+                <a href="#" class="btn btn-secondary ms-auto px-3">Details</a>
+              </div>
+            </div>
+        </div>
+    }
+</div>
+</div>

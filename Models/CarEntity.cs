@@ -2,16 +2,20 @@
 {
     public class CarEntity
     {
-        public string Brand { get; set; }
-        public string Model { get; set; }
+        public int Id { get; set; }
+        public int ModelId { get; set; }
+        public virtual ModelEntity Model { get; set; }
         public string Year { get; set; }
         public int EngineDisplacement { get; set; }
         public string HP { get; set; }
-        public string Fuel { get; set; }
-        public string Body { get; set; }
+        public int FuelId { get; set; }
+        public virtual FuelEntity Fuel { get; set; }
+        public int BodyId { get; set; }
+        public virtual BodyEntity Body { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-
-        virtual public string Person { get; set; }
+        public byte? IsDeleted { get; set; }
+        public int PersonId { get; set; }
+        public virtual PersonEntity Person { get; set; }
     }
 }
