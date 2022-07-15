@@ -1,25 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CarAds.Managers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarAds.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly CarManager _carManager;
+
+        public HomeController(CarManager carManager)
+        {
+            _carManager = carManager;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
-
-        //[HttpPost]
-        //public IActionResult Index(Person person)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        Attendance.AddAttendant(person);
-        //        TempData["FirstName"] = person.FirstName + " " + person.LastName;
-        //        return RedirectToAction("Index");
-        //    }
-        //    else { return View(); }
-        //}
 
         public IActionResult Error404()
         {

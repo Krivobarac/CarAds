@@ -1,8 +1,93 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model CarAds.DTOs.CarDTO
+@using CarAds.DTOs
+@inject CarAds.Managers.CarManager carManager
 @{
     ViewBag.TitleSufix = "Add Car Page";
 }
 
-<h1>Add Car</h1>
+<div class="card">
+    <div class="card-header">
+        <h2 class="m-0">Add Car</h2>
+    </div>
+    @using (Html.BeginForm("AddCar", "Car", FormMethod.Post, new { @class = "card-body row" }))
+    {
+        <div class="col-md-6 mb-2">
+            @Html.LabelFor(m => m.Brand, "Brand:", new { @class = "form-label" })
+            @Html.DropDownListFor(m => m.Brand, carManager.GetBrands(), "Brand select", new { @class = "form-select text-secondary", @onchange = "fillModels()" })
+            @Html.ValidationMessageFor(m => m.Brand, null, new { @class = "text-danger small"})
+        </div>
+        <div class="col-md-6 mb-2">
+            @Html.LabelFor(m => m.Model, "Model:", new { @class = "form-label" })
+            @Html.DropDownListFor(m => m.Model, new List<SelectListItem>(), "Model select", new { @class = "form-select text-secondary" })
+            @Html.ValidationMessageFor(m => m.Model, null, new { @class = "text-danger small"})
+        </div>
+        <div class="col-md-6 mb-2">
+            @Html.LabelFor(m => m.Body, "Body:", new { @class = "form-label" })
+            @Html.DropDownListFor(m => m.Body, carManager.GetBodies(), "Body select", new { @class = "form-select text-secondary" })
+            @Html.ValidationMessageFor(m => m.Body, null, new { @class = "text-danger small"})
+        </div>
+        <div class="col-md-6 mb-2">
+            @Html.LabelFor(m => m.Year, "Year:", new { @class = "form-label" })
+            @Html.DropDownListFor(m => m.Year, carManager.GetYears(), "Year select", new { @class = "form-select text-secondary" })
+            @Html.ValidationMessageFor(m => m.Year, null, new { @class = "text-danger small"})
+        </div>
+        <div class="col-md-6 mb-2">
+            @Html.LabelFor(m => m.Fuel, "Fuel:", new { @class = "form-label" })
+            @Html.DropDownListFor(m => m.Fuel, carManager.GetFuels(), "Fuel select", new { @class = "form-select text-secondary" })
+            @Html.ValidationMessageFor(m => m.Fuel, null, new { @class = "text-danger small"})
+        </div>
+        <div class="col-md-6 mb-2">
+            @Html.Label("EngineDisplacement", "Engine Displacement:", new { @class = "form-label" })
+            @Html.TextBox("EngineDisplacement", null, new { @class = "form-control", autocomplete = "off", placeholder = "Engine Displacement" })
+            @Html.ValidationMessage("EngineDisplacement", null, new { @class = "text-danger small"})
+        </div>
+        <div class="col-md-6 mb-2">
+            @Html.Label("HP", "Horse Power:", new { @class = "form-label" })
+            @Html.TextBox("HP", null, new { @class = "form-control", autocomplete = "off", placeholder = "Horse Power" })
+            @Html.ValidationMessage("HP", null, new { @class = "text-danger small"})
+        </div>
+        <div class="col-md-6 mb-2">
+            @Html.Label("Price", "Price:", new { @class = "form-label" })
+             <div class="input-group">
+                <span class="input-group-text">$</span>
+                @Html.TextBox("Price", null, new { @class = "form-control", autocomplete = "off", placeholder = "Price" })
+                <span class="input-group-text">.00</span>
+                @Html.ValidationMessage("Price", null, new { @class = "text-danger small col-12"})
+            </div>
+        </div>
+        <div class="col-md-6 mb-2">
+            @Html.Label("Phone", "Phone:", new { @class = "form-label" })
+            <div class="input-group">
+                <span class="input-group-text" id="addon-wrapping">&#9742;</span>
+                @Html.TextBox("Phone", null, new { @class = "form-control", autocomplete = "off", placeholder = "Phone" })
+                @Html.ValidationMessage("Phone", null, new { @class = "text-danger small col-12"})
+            </div>
+        </div>
+        <div class="col-12 mb-2">
+            @Html.Label("Description", "Description:", new { @class = "form-label" })
+            @Html.TextArea("Description", null, new { @class = "form-control", rows="3" })
+            @Html.ValidationMessage("Description", null, new { @class = "text-danger small col-12"})
+        </div>
+        <div class="d-flex col-12 justify-content-end mt-2">
+            <button type="submit" class="btn btn-dark">Sign in</button>
+        </div>
+    }
+</div>
+
+<script>
+    function fillModels(brandId) {
+        var brandId = $('#Brand').val();
+        $.ajax({
+            url: '/Car/FillModels',
+            type: "GET",
+            dataType: "JSON",
+            data: { BrandId: brandId},
+            success: function (models) {                    
+            $("#Model").html("");
+            $.each(models, function (i, model) {
+                $("#Model").append(
+                    $('<option></option>').val(model.value).html(model.text));
+            });}
+        });
+    }
+</script>
