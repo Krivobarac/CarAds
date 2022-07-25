@@ -4,6 +4,7 @@ using CarAds.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarAds.Migrations
 {
     [DbContext(typeof(CarAdsContext))]
-    partial class CarAdsContextModelSnapshot : ModelSnapshot
+    [Migration("20220716113332_remove_Image_Column_From_CarEntity_Add_Car_Column_To_Image_Entity")]
+    partial class remove_Image_Column_From_CarEntity_Add_Car_Column_To_Image_Entity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -426,7 +428,7 @@ namespace CarAds.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Images");
+                    b.ToTable("ImageEntity");
                 });
 
             modelBuilder.Entity("CarAds.Models.ModelEntity", b =>

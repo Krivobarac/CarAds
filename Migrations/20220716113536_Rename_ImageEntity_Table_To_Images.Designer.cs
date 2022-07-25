@@ -4,6 +4,7 @@ using CarAds.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarAds.Migrations
 {
     [DbContext(typeof(CarAdsContext))]
-    partial class CarAdsContextModelSnapshot : ModelSnapshot
+    [Migration("20220716113536_Rename_ImageEntity_Table_To_Images")]
+    partial class Rename_ImageEntity_Table_To_Images
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

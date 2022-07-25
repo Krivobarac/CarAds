@@ -20,6 +20,7 @@ namespace CarAds.Models
         public DbSet<CarEntity> Cars { get; set; }
         public DbSet<BodyEntity> Bodies { get; set; }
         public DbSet<FuelEntity> Fuels { get; set; }
+        public DbSet<ImageEntity> Images { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

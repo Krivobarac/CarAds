@@ -25,5 +25,7 @@ namespace CarAds.DTOs
         public string Price { get; set; }
         [Required(ErrorMessage = "Phone number is required")]
         public string Phone { get; set; }
+        public virtual List<IFormFile>? ImageFiles { get; set; }
+        public virtual List<string>? ImagePaths { get; set; }
     }
 }

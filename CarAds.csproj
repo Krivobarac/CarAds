@@ -7,9 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <COMReference Include="{d37e2a3e-8545-3a39-9f4f-31827c9124ab}">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>4</VersionMinor>
+      <VersionMajor>2</VersionMajor>
+      <Guid>d37e2a3e-8545-3a39-9f4f-31827c9124ab</Guid>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Views\AboutUs\" />
     <Folder Include="Views\Contact\" />
     <Folder Include="Views\Ad\" />
+    <Folder Include="wwwroot\assets\images\car-images\" />
+    <Folder Include="wwwroot\assets\images\car-temp-images\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +31,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="NetVips" Version="2.1.0" />
+    <PackageReference Include="NetVips.Native" Version="8.12.2" />
   </ItemGroup>
 
 </Project>

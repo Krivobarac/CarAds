@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<CarManager>();
+builder.Services.AddTransient<ImageManager>();
 
 var app = builder.Build();
 

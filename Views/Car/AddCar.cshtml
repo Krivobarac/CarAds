@@ -9,7 +9,7 @@
     <div class="card-header">
         <h2 class="m-0">Add Car</h2>
     </div>
-    @using (Html.BeginForm("AddCar", "Car", FormMethod.Post, new { @class = "card-body row" }))
+    @using (Html.BeginForm("AddCar", "Car", FormMethod.Post, new { @class = "card-body row", enctype = "multipart/form-data" }))
     {
         <div class="col-md-6 mb-2">
             @Html.LabelFor(m => m.Brand, "Brand:", new { @class = "form-label" })
@@ -37,36 +37,40 @@
             @Html.ValidationMessageFor(m => m.Fuel, null, new { @class = "text-danger small"})
         </div>
         <div class="col-md-6 mb-2">
-            @Html.Label("EngineDisplacement", "Engine Displacement:", new { @class = "form-label" })
-            @Html.TextBox("EngineDisplacement", null, new { @class = "form-control", autocomplete = "off", placeholder = "Engine Displacement" })
-            @Html.ValidationMessage("EngineDisplacement", null, new { @class = "text-danger small"})
+            @Html.LabelFor(m => m.EngineDisplacement, "Engine Displacement:", new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.EngineDisplacement, null, new { @class = "form-control", autocomplete = "off", placeholder = "Engine Displacement" })
+            @Html.ValidationMessageFor(m => m.EngineDisplacement, null, new { @class = "text-danger small"})
         </div>
         <div class="col-md-6 mb-2">
-            @Html.Label("HP", "Horse Power:", new { @class = "form-label" })
-            @Html.TextBox("HP", null, new { @class = "form-control", autocomplete = "off", placeholder = "Horse Power" })
-            @Html.ValidationMessage("HP", null, new { @class = "text-danger small"})
+            @Html.LabelFor(m => m.HP, "Horse Power:", new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.HP, null, new { @class = "form-control", autocomplete = "off", placeholder = "Horse Power" })
+            @Html.ValidationMessageFor(m => m.HP, null, new { @class = "text-danger small"})
         </div>
         <div class="col-md-6 mb-2">
-            @Html.Label("Price", "Price:", new { @class = "form-label" })
+            @Html.LabelFor(m => m.Price, "Price:", new { @class = "form-label" })
              <div class="input-group">
                 <span class="input-group-text">$</span>
-                @Html.TextBox("Price", null, new { @class = "form-control", autocomplete = "off", placeholder = "Price" })
+                @Html.TextBoxFor(m => m.Price, null, new { @class = "form-control", autocomplete = "off", placeholder = "Price" })
                 <span class="input-group-text">.00</span>
-                @Html.ValidationMessage("Price", null, new { @class = "text-danger small col-12"})
+                @Html.ValidationMessageFor(m => m.Price, null, new { @class = "text-danger small col-12"})
             </div>
         </div>
         <div class="col-md-6 mb-2">
-            @Html.Label("Phone", "Phone:", new { @class = "form-label" })
+            @Html.LabelFor(m => m.Phone, "Phone:", new { @class = "form-label" })
             <div class="input-group">
                 <span class="input-group-text" id="addon-wrapping">&#9742;</span>
-                @Html.TextBox("Phone", null, new { @class = "form-control", autocomplete = "off", placeholder = "Phone" })
-                @Html.ValidationMessage("Phone", null, new { @class = "text-danger small col-12"})
+                @Html.TextBoxFor(m => m.Phone, null, new { @class = "form-control", autocomplete = "off", placeholder = "Price" })
+                @Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger small col-12"})
             </div>
         </div>
+        <div class="col-md-6 mb-2">
+            @Html.LabelFor(m => m.ImageFiles, "Image:", new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.ImageFiles, null, new { @class = "form-control", type = "file", accept="image/png, image/jpeg" })
+        </div>
         <div class="col-12 mb-2">
-            @Html.Label("Description", "Description:", new { @class = "form-label" })
-            @Html.TextArea("Description", null, new { @class = "form-control", rows="3" })
-            @Html.ValidationMessage("Description", null, new { @class = "text-danger small col-12"})
+            @Html.LabelFor(m => m.Description, "Description:", new { @class = "form-label" })
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows="3" })
+            @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger small"})
         </div>
         <div class="d-flex col-12 justify-content-end mt-2">
             <button type="submit" class="btn btn-dark">Sign in</button>
