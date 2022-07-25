@@ -9,21 +9,24 @@ namespace CarAds.Managers
     public class CarManager
     {
         private readonly IMapper _mapper;
+        private readonly ImageManager _imageManager;
 
-        public CarManager(IMapper mapper)
+        public CarManager(IMapper mapper, ImageManager imageManager)
         {
             _mapper = mapper;
+            _imageManager = imageManager;
         }
 
-        public void AddCar(CarDTO car)
+        public void AddCar(CarDTO carDto)
         {
-            PersonEntity person = _mapper.Map<PersonEntity>(car);
-            CarEntity carEntity = _mapper.Map<CarEntity>(car);
+            PersonEntity person = _mapper.Map<PersonEntity>(carDto);
+            CarEntity carEntity = _mapper.Map<CarEntity>(carDto);
             carEntity.Person = person;
-            
+
             using (CarAdsContext ctx = new CarAdsContext())
             {
-                ctx.Cars.Add(carEntity);
+                carEntity = ctx.Cars.Add(carEntity).Entity;
+                _imageManager.AddImages(carDto, carEntity, ctx);
                 ctx.SaveChanges();
             }
         }
@@ -40,6 +43,7 @@ namespace CarAds.Managers
                         .Include(c => c.Fuel)
                         .Include(c => c.Person)
                         .Include(c => c.Body)
+                        .Include(c => c.Images)
                         .Where(c => c.IsDeleted != 1).ToList()
                     );
             }

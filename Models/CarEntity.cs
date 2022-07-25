@@ -1,4 +1,6 @@
-﻿namespace CarAds.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace CarAds.Models
 {
     public class CarEntity
     {
@@ -17,5 +19,7 @@
         public byte? IsDeleted { get; set; }
         public int PersonId { get; set; }
         public virtual PersonEntity Person { get; set; }
+        [InverseProperty("Car")]
+        public virtual List<ImageEntity> Images { get; set; }
     }
 }

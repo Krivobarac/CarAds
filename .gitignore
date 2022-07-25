@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+/wwwroot/assets/images/car-images
+/wwwroot/assets/images/car-temp-images
