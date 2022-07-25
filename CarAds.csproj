@@ -19,7 +19,6 @@
     <Folder Include="Views\AboutUs\" />
     <Folder Include="Views\Contact\" />
     <Folder Include="Views\Ad\" />
-    <Folder Include="wwwroot\assets\images\car-images\" />
     <Folder Include="wwwroot\assets\images\car-temp-images\" />
   </ItemGroup>
 
