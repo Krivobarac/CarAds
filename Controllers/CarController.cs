@@ -37,5 +37,10 @@ namespace CarAds.Controllers
         {
             return _carManager.GetModels(BrandId);
         }
+
+        public ActionResult<CarDTO> GetCar(int carId)
+        {
+            return _carManager.GetCar(carId);
+        }
     }
 }
