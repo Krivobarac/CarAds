@@ -49,6 +49,25 @@ namespace CarAds.Managers
             }
         }
 
+        public CarDTO GetCar(int carId)
+        {
+            using (CarAdsContext ctx = new CarAdsContext())
+            {
+                return _mapper
+                    .Map<CarDTO>(
+                        ctx.Cars
+                        .Include(c => c.Model)
+                        .ThenInclude(m => m.Brand)
+                        .Include(c => c.Fuel)
+                        .Include(c => c.Person)
+                        .Include(c => c.Body)
+                        .Include(c => c.Images)
+                        .Where(c => c.IsDeleted != 1 && c.Id == carId)
+                        .FirstOrDefault()
+                    );
+            }
+        }
+
         public IEnumerable<SelectListItem> GetBrands()
         {
             using (CarAdsContext ctx = new CarAdsContext())

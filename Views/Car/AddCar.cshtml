@@ -59,13 +59,13 @@
             @Html.LabelFor(m => m.Phone, "Phone:", new { @class = "form-label" })
             <div class="input-group">
                 <span class="input-group-text" id="addon-wrapping">&#9742;</span>
-                @Html.TextBoxFor(m => m.Phone, null, new { @class = "form-control", autocomplete = "off", placeholder = "Price" })
+                @Html.TextBoxFor(m => m.Phone, null, new { @class = "form-control", autocomplete = "off", placeholder = "Phone" })
                 @Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger small col-12"})
             </div>
         </div>
         <div class="col-md-6 mb-2">
             @Html.LabelFor(m => m.ImageFiles, "Image:", new { @class = "form-label" })
-            @Html.TextBoxFor(m => m.ImageFiles, null, new { @class = "form-control", type = "file", accept="image/png, image/jpeg" })
+            @Html.TextBoxFor(m => m.ImageFiles, null, new { @class = "form-control", multiple="multiple", type = "file", accept="image/png, image/jpeg" })
         </div>
         <div class="col-12 mb-2">
             @Html.LabelFor(m => m.Description, "Description:", new { @class = "form-label" })

@@ -1,6 +1,6 @@
 ﻿@inject CarAds.Managers.CarManager carManager
 
-<h2>Cars</h2>
+<h2 class="mb-5">Cars</h2>
 
 <div class="container p-0">
     <div class="row">
@@ -13,10 +13,74 @@
                 <h4 class="card-title mb-2">@car.Brand @car.Model</h4>
                 <p class="card-text mb-2">@car.Year</p>
                 <p class="card-text mb-2">$@car.Price</p>
-                <a href="#" class="btn btn-secondary ms-auto px-3">Details</a>
+                <a href="#" class="btn btn-secondary ms-auto px-3" data-bs-toggle="modal" data-bs-target="#carModal" onclick="showDetail(@car.CarId)">Details</a>
               </div>
             </div>
         </div>
     }
     </div>
 </div>
+
+<div class="modal fade" tabindex="-1" id="carModal" data-bs-backdrop="false" style="backdrop-filter: blur(5px); background: rgba(128, 128, 128, .5)">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="carTitle" class="title modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeDetail()"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-1"><span class="fw-bold">Price: </span>$<span id="carPrice"></span></p>
+        <p class="mb-1"><span class="fw-bold">Year: </span><span id="carYear"></span></p>
+        <p class="mb-1"><span class="fw-bold">Body: </span><span id="carBody"></span></p>
+        <p class="mb-1"><span class="fw-bold">Fuel: </span><span id="carFuel"></span></p>
+        <p class="mb-1"><span class="fw-bold">Engine Displacement: </span><span id="carEngineDisplacement"></span></p>
+        <p class="mb-1"><span class="fw-bold">HP: </span><span id="carHP"></span></p>
+        <p class="mb-3"><span class="fw-bold">Description: </span><span id="carDescription"></span></p>
+
+        <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div id="carCarouselInner" class="carousel-inner">
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>      
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    function showDetail(carId) {
+        $.ajax({
+            url: '/Car/GetCar',
+            type: "GET",
+            dataType: "JSON",
+            data: {carId: carId},
+            success: function (car) {
+                $("#carTitle").text(car.brand + " " + car.model);
+                $("#carDescription").text(car.description);
+                $("#carYear").text(car.year);
+                $("#carBody").text(car.body);
+                $("#carFuel").text(car.fuel);
+                $("#carEngineDisplacement").text(car.engineDisplacement);
+                $("#carHP").text(car.hp);
+                $("#carPrice").text(car.price);
+
+                let i = 0;
+                for(img of car.imagePaths) {
+                   $("#carCarouselInner").append('<div class="carousel-item ' + (i === 0 ? 'active' : '') + '"><img src="' + img +  '" class="d-block w-100" alt="Carousel image" style="height: 263px; object-fit: cover"></div>');
+                   i++;
+                }
+            }
+        });
+    }
+
+    function closeDetail() {
+        $(".carousel-item").remove("div");
+    }
+</script>

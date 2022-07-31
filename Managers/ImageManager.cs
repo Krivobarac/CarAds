@@ -42,7 +42,7 @@ namespace CarAds.Managers
                 imageEntity.Image = @"\assets\images\car-images\" + imageEntity.Image;
             }
 
-            ctx.Images.AddRange(imageEntities.AsQueryable());
+            ctx.Images.AddRange(imageEntities);
             ResizeAndSaveImages(images, 700, 700);
             DeleteTempImages();
         }
@@ -85,9 +85,10 @@ namespace CarAds.Managers
         {
             List<Image> images = new List<Image>();
 
-            using (MemoryStream memoryStream = new MemoryStream())
+            
+            files.ForEach(f =>
             {
-                files.ForEach(f =>
+                using (MemoryStream memoryStream = new MemoryStream())
                 {
                     var tempFilepath = _hostEnvironment.WebRootPath + @$"\assets\images\car-temp-images\{f.FileName}";
                     f.CopyTo(memoryStream);
@@ -95,8 +96,8 @@ namespace CarAds.Managers
                     {
                         image.WriteToFile(tempFilepath);
                     }
-                });
-            }
+                }
+            });
 
             List<string> imagesPath = GetImagesFromDisk("car-temp-images");
             foreach (string imagePath in imagesPath)
