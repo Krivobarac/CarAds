@@ -22,13 +22,17 @@ namespace CarAds.Models
         public DbSet<FuelEntity> Fuels { get; set; }
         public DbSet<ImageEntity> Images { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public static IConfigurationRoot GetConfiguration()
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
+            return new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
             .AddJsonFile("appsettings.json")
             .Build();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("PrimaryConnectionString"));
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(GetConfiguration().GetConnectionString("PrimaryConnectionString"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
