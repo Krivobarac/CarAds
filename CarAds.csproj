@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\assets\images\car-images\" />
     <Folder Include="wwwroot\assets\images\car-temp-images\" />
   </ItemGroup>
 
