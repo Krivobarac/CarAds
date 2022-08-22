@@ -44,7 +44,8 @@ namespace CarAds.Managers
                         .Include(c => c.Person)
                         .Include(c => c.Body)
                         .Include(c => c.Images)
-                        .Where(c => c.IsDeleted != 1).ToList()
+                        .Where(c => c.IsDeleted != 1)
+                        .ToList()
                     );
             }
         }
@@ -65,6 +66,25 @@ namespace CarAds.Managers
                         .Where(c => c.IsDeleted != 1 && c.Id == carId)
                         .FirstOrDefault()
                     );
+            }
+        }
+
+        public bool DeleteCar(int carId)
+        {
+            using (CarAdsContext ctx = new CarAdsContext())
+            {
+                CarEntity carEntity = ctx.Cars
+                    .Where(c => c.IsDeleted != 1 && c.Id == carId)
+                    .First();
+
+                if (carEntity != null)
+                {
+                    carEntity.IsDeleted = 1;
+                    ctx.SaveChanges();
+                    return true;
+                }
+
+                return false;
             }
         }
 

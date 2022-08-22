@@ -42,5 +42,10 @@ namespace CarAds.Controllers
         {
             return _carManager.GetCar(carId);
         }
+
+        public ActionResult<bool> DeleteCar(int carId)
+        {
+            return _carManager.DeleteCar(carId);
+        }
     }
 }

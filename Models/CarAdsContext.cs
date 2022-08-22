@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarAds.Models
 {
@@ -37,6 +38,8 @@ namespace CarAds.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CarEntity>().Property(p => p.Price).HasColumnType("decimal(18,2)");
+
             int id = 1;
             modelBuilder.Entity<ModelEntity>()
                 .HasData(

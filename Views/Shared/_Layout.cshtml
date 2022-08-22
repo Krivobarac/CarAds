@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -38,6 +42,29 @@
                         <li class="nav-item m-auto">
                             @Html.ActionLink("Add Car", @ViewBag.AddCarAction as String, @ViewBag.CarControoler as String, null, new { @class = "nav-link d-inline" });
                         </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">@User.Identity.Name</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item m-auto">
+                                        <a class="nav-link text-dark text-nowrap" id="register" asp-area="Identity" asp-page="/Account/Register">New Admin</a>
+                                    </li>
+                                    <li class="nav-item m-auto">
+                                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                                            <button type="submit" class="nav-link text-dark bg-transparent border-0 pe-0">Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        } else if (ViewBag.Admin == true)
+                        {
+                            <li class="nav-item m-auto">
+                                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button id="logout" type="submit" class="nav-link btn btn-link">Login</button>
+                                </form>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

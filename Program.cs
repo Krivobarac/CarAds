@@ -1,15 +1,22 @@
 using CarAds.Managers;
 using CarAds.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using CarAds.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("IdentityCarAdsContextConnection") ?? throw new InvalidOperationException("Connection string 'IdentityCarAdsContextConnection' not found.");
 
 // Add services to the container.
 builder.Services.AddDbContext<CarAdsContext>(option => option.UseSqlServer(CarAdsContext.GetConfiguration().GetConnectionString("PrimaryConnectionString")));
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<IdentityCarAdsContext>();
+builder.Services.AddDbContext<IdentityCarAdsContext>(option => option.UseSqlServer(IdentityCarAdsContext.GetConfiguration().GetConnectionString("IdentityCarAdsContextConnection")));
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<CarManager>();
 builder.Services.AddTransient<ImageManager>();
+
+IdentityCarAdsContext.CreateIdentityUserAndRoleSeedAsync();
 
 var app = builder.Build();
 
@@ -21,15 +28,20 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// Seed
 using var scope = app.Services.CreateScope();
-CarAdsContext context = scope.ServiceProvider.GetRequiredService<CarAdsContext>();
-context.Database.Migrate();
+CarAdsContext carAdsContext = scope.ServiceProvider.GetRequiredService<CarAdsContext>();
+carAdsContext.Database.Migrate();
+IdentityCarAdsContext identityCarAdsContext = scope.ServiceProvider.GetRequiredService<IdentityCarAdsContext>();
+identityCarAdsContext.Database.Migrate();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseStatusCodePagesWithReExecute("/Home/Error404/{0}");
 
+app.MapRazorPages();
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
