@@ -39,7 +39,7 @@ namespace CarAds.Migrations
                     b.HasIndex("BodyName")
                         .IsUnique();
 
-                    b.ToTable("Bodies");
+                    b.ToTable("Bodies", (string)null);
 
                     b.HasData(
                         new
@@ -104,7 +104,7 @@ namespace CarAds.Migrations
                     b.HasIndex("BrandName")
                         .IsUnique();
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
 
                     b.HasData(
                         new
@@ -355,7 +355,7 @@ namespace CarAds.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("Cars");
+                    b.ToTable("Cars", (string)null);
                 });
 
             modelBuilder.Entity("CarAds.Models.FuelEntity", b =>
@@ -372,7 +372,7 @@ namespace CarAds.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Fuels");
+                    b.ToTable("Fuels", (string)null);
 
                     b.HasData(
                         new
@@ -426,7 +426,7 @@ namespace CarAds.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Images");
+                    b.ToTable("Images", (string)null);
                 });
 
             modelBuilder.Entity("CarAds.Models.ModelEntity", b =>
@@ -451,7 +451,7 @@ namespace CarAds.Migrations
 
                     b.HasIndex("BrandId");
 
-                    b.ToTable("Models");
+                    b.ToTable("Models", (string)null);
 
                     b.HasData(
                         new
@@ -5818,7 +5818,7 @@ namespace CarAds.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Persons");
+                    b.ToTable("Persons", (string)null);
                 });
 
             modelBuilder.Entity("CarAds.Models.CarEntity", b =>
