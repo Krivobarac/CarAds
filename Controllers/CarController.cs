@@ -1,5 +1,6 @@
 ﻿using CarAds.DTOs;
 using CarAds.Managers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -43,6 +44,7 @@ namespace CarAds.Controllers
             return _carManager.GetCar(carId);
         }
 
+        [Authorize]
         public ActionResult<bool> DeleteCar(int carId)
         {
             return _carManager.DeleteCar(carId);
