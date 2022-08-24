@@ -40,7 +40,7 @@ public class IdentityCarAdsContext : IdentityDbContext<IdentityUser>
         using (var ctx = new IdentityCarAdsContext())
         {
 
-            if (ctx.Users.Where(u => u.Id == "1") == null)
+            if (!ctx.Users.Any())
             {
                 var hasher = new PasswordHasher<IdentityUser>();
                 ctx.Users.Add(
@@ -59,7 +59,7 @@ public class IdentityCarAdsContext : IdentityDbContext<IdentityUser>
             }
                 
 
-            if (ctx.Roles.Where(r => r.Id == "1") == null)
+            if (!ctx.Roles.Any())
             {
                 ctx.Roles.Add(
                     new IdentityRole
@@ -73,7 +73,7 @@ public class IdentityCarAdsContext : IdentityDbContext<IdentityUser>
 
             
 
-            if (ctx.UserRoles.Where(ur => ur.UserId == "1" && ur.RoleId == "1") == null)
+            if (!ctx.UserRoles.Any())
             {
                 ctx.UserRoles.Add(
                     new IdentityUserRole<string>
