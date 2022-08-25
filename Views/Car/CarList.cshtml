@@ -1,5 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
-
+@using CarAds
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
 @inject SignInManager<IdentityUser> SignInManager
 @inject CarAds.Managers.CarManager carManager
 

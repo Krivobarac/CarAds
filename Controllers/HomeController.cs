@@ -1,4 +1,5 @@
 ﻿using CarAds.Managers;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarAds.Controllers
@@ -20,6 +21,16 @@ namespace CarAds.Controllers
         public IActionResult Error404()
         {
             return View();
+        }
+
+        public IActionResult SetCulture(string culture, string sourceUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+            return Redirect(sourceUrl);
         }
     }
 }

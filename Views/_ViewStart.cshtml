@@ -1,8 +1,12 @@
-﻿@{
+﻿@using CarAds
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
     Layout = "_Layout";
 
     //Site
-    ViewBag.Title = "Car Ads";
+    ViewBag.Title = @Localizer["Car Ads"];
 
     //Controllers
     ViewBag.HomeController = "Home";

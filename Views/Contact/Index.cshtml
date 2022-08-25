@@ -1,25 +1,29 @@
-﻿@{
-    ViewBag.TitleSufix = "Contact";
+﻿@using CarAds
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewBag.TitleSufix = @Localizer["Contact"];
 }
 
-<h2 class="mb-5">Contact</h2>
+<h2 class="mb-5">@Localizer["Contact"]</h2>
 
 <form>
     <div class="row mb-3">
         <div class="col-12 col-md-6">
-            <label for="email" class="form-label">Email address:</label>
+            <label for="email" class="form-label">@Localizer["Email address:"]</label>
             <input type="email" class="form-control" id="email" placeholder="name@example.com">
         </div>
         <div class="col-12 col-md-6">
-            <label for="title" class="form-label">Title:</label>
+            <label for="title" class="form-label">@Localizer["Title:"]</label>
             <input type="text" class="form-control" id="title" placeholder="Title">
         </div>
     </div>
     <div class="mb-3">
-      <label for="message" class="form-label">Your Message:</label>
+      <label for="message" class="form-label">@Localizer["Your Message:"]</label>
       <textarea class="form-control" id="message" rows="4"></textarea>
     </div>
     <div class="d-flex col-12">
-        <button type="submit" class="btn btn-dark mb-3 ms-auto">Send Message</button>
+        <button type="submit" class="btn btn-dark mb-3 ms-auto">@Localizer["Send Message"]</button>
     </div>
 </form>

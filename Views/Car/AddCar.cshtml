@@ -1,8 +1,12 @@
 ﻿@model CarAds.DTOs.CarDTO
 @using CarAds.DTOs
+@using CarAds
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
 @inject CarAds.Managers.CarManager carManager
+
 @{
-    ViewBag.TitleSufix = "Add Car Page";
+    ViewBag.TitleSufix = @Localizer["Add Car Page"];
 }
 
 <div class="card">
@@ -12,42 +16,42 @@
     @using (Html.BeginForm("AddCar", "Car", FormMethod.Post, new { @class = "card-body row", enctype = "multipart/form-data" }))
     {
         <div class="col-md-6 mb-2">
-            @Html.LabelFor(m => m.Brand, "Brand:", new { @class = "form-label" })
+            @Html.LabelFor(m => m.Brand, @Localizer["Brand:"], new { @class = "form-label" })
             @Html.DropDownListFor(m => m.Brand, carManager.GetBrands(), "Brand select", new { @class = "form-select text-secondary", @onchange = "fillModels()" })
             @Html.ValidationMessageFor(m => m.Brand, null, new { @class = "text-danger small"})
         </div>
         <div class="col-md-6 mb-2">
-            @Html.LabelFor(m => m.Model, "Model:", new { @class = "form-label" })
+            @Html.LabelFor(m => m.Model, @Localizer["Model:"], new { @class = "form-label" })
             @Html.DropDownListFor(m => m.Model, new List<SelectListItem>(), "Model select", new { @class = "form-select text-secondary" })
             @Html.ValidationMessageFor(m => m.Model, null, new { @class = "text-danger small"})
         </div>
         <div class="col-md-6 mb-2">
-            @Html.LabelFor(m => m.Body, "Body:", new { @class = "form-label" })
+            @Html.LabelFor(m => m.Body, @Localizer["Body:"], new { @class = "form-label" })
             @Html.DropDownListFor(m => m.Body, carManager.GetBodies(), "Body select", new { @class = "form-select text-secondary" })
             @Html.ValidationMessageFor(m => m.Body, null, new { @class = "text-danger small"})
         </div>
         <div class="col-md-6 mb-2">
-            @Html.LabelFor(m => m.Year, "Year:", new { @class = "form-label" })
+            @Html.LabelFor(m => m.Year, @Localizer["Year:"], new { @class = "form-label" })
             @Html.DropDownListFor(m => m.Year, carManager.GetYears(), "Year select", new { @class = "form-select text-secondary" })
             @Html.ValidationMessageFor(m => m.Year, null, new { @class = "text-danger small"})
         </div>
         <div class="col-md-6 mb-2">
-            @Html.LabelFor(m => m.Fuel, "Fuel:", new { @class = "form-label" })
+            @Html.LabelFor(m => m.Fuel, @Localizer["Fuel:"], new { @class = "form-label" })
             @Html.DropDownListFor(m => m.Fuel, carManager.GetFuels(), "Fuel select", new { @class = "form-select text-secondary" })
             @Html.ValidationMessageFor(m => m.Fuel, null, new { @class = "text-danger small"})
         </div>
         <div class="col-md-6 mb-2">
-            @Html.LabelFor(m => m.EngineDisplacement, "Engine Displacement:", new { @class = "form-label" })
+            @Html.LabelFor(m => m.EngineDisplacement, @Localizer["Engine Displacement:"], new { @class = "form-label" })
             @Html.TextBoxFor(m => m.EngineDisplacement, null, new { @class = "form-control", autocomplete = "off", placeholder = "Engine Displacement" })
             @Html.ValidationMessageFor(m => m.EngineDisplacement, null, new { @class = "text-danger small"})
         </div>
         <div class="col-md-6 mb-2">
-            @Html.LabelFor(m => m.HP, "Horse Power:", new { @class = "form-label" })
+            @Html.LabelFor(m => m.HP, @Localizer["Horse Power:"], new { @class = "form-label" })
             @Html.TextBoxFor(m => m.HP, null, new { @class = "form-control", autocomplete = "off", placeholder = "Horse Power" })
             @Html.ValidationMessageFor(m => m.HP, null, new { @class = "text-danger small"})
         </div>
         <div class="col-md-6 mb-2">
-            @Html.LabelFor(m => m.Price, "Price:", new { @class = "form-label" })
+            @Html.LabelFor(m => m.Price, @Localizer["Price:"], new { @class = "form-label" })
              <div class="input-group">
                 <span class="input-group-text">$</span>
                 @Html.TextBoxFor(m => m.Price, null, new { @class = "form-control", autocomplete = "off", placeholder = "Price" })
@@ -56,7 +60,7 @@
             </div>
         </div>
         <div class="col-md-6 mb-2">
-            @Html.LabelFor(m => m.Phone, "Phone:", new { @class = "form-label" })
+            @Html.LabelFor(m => m.Phone, @Localizer["Phone:"], new { @class = "form-label" })
             <div class="input-group">
                 <span class="input-group-text" id="addon-wrapping">&#9742;</span>
                 @Html.TextBoxFor(m => m.Phone, null, new { @class = "form-control", autocomplete = "off", placeholder = "Phone" })
@@ -64,16 +68,16 @@
             </div>
         </div>
         <div class="col-md-6 mb-2">
-            @Html.LabelFor(m => m.ImageFiles, "Image:", new { @class = "form-label" })
+            @Html.LabelFor(m => m.ImageFiles, @Localizer["Image:"], new { @class = "form-label" })
             @Html.TextBoxFor(m => m.ImageFiles, null, new { @class = "form-control", multiple="multiple", type = "file", accept="image/png, image/jpeg" })
         </div>
         <div class="col-12 mb-2">
-            @Html.LabelFor(m => m.Description, "Description:", new { @class = "form-label" })
+            @Html.LabelFor(m => m.Description, @Localizer["Description:"], new { @class = "form-label" })
             @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows="3" })
             @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger small"})
         </div>
         <div class="d-flex col-12 justify-content-end mt-2">
-            <button type="submit" class="btn btn-dark">Sign in</button>
+            <button type="submit" class="btn btn-dark">@Localizer["Sign in"]</button>
         </div>
     }
 </div>
