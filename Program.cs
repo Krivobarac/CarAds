@@ -20,11 +20,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddLocalization(opts => opts.ResourcesPath = "Resources");
 builder.Services.AddControllersWithViews().
     AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).
-        AddDataAnnotationsLocalization(options =>
-        {
-            options.DataAnnotationLocalizerProvider = (type, factory) =>
-                factory.Create(typeof(SharedResource));
-        });
+        AddDataAnnotationsLocalization();
 
 builder.Services.AddTransient<CarManager>();
 builder.Services.AddTransient<ImageManager>();

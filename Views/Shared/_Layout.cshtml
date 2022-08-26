@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using CarAds
 @using Microsoft.Extensions.Localization
+@using System.Globalization
 @inject IStringLocalizer<SharedResource> Localizer
 @inject SignInManager<IdentityUser> SignInManager
 
@@ -39,7 +40,7 @@
                             @Html.ActionLink(@Localizer["Contact"], @ViewBag.IndexAction as String, @ViewBag.ContactController as String, null,  new { @class = "nav-link d-inline" });
                         </li>
                         <li class="nav-item m-auto">
-                            @Html.ActionLink(@Localizer["About us"], @ViewBag.IndexAction as String, @ViewBag.AboutUsController as String, null, new { @class = "nav-link d-inline" });
+                            @Html.ActionLink(@Localizer["About Us"], @ViewBag.IndexAction as String, @ViewBag.AboutUsController as String, null, new { @class = "nav-link d-inline" });
                         </li>
                         <li class="nav-item m-auto">
                             @Html.ActionLink(@Localizer["Add Car"], @ViewBag.AddCarAction as String, @ViewBag.CarControoler as String, null, new { @class = "nav-link d-inline" });
@@ -69,7 +70,7 @@
                         }
                         <li class="nav-item">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">lang</a>
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">@(CultureInfo.CurrentCulture.Name.Split("-")[0])</a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item m-auto text-dark">
                                         @Html.ActionLink("en", "SetCulture", "Home", new { culture = "en", sourceUrl = @Context.Request.Path }, new { @class = "nav-link text-dark"})

@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About us" xml:space="preserve">
+  <data name="About Us" xml:space="preserve">
     <value>O nama</value>
   </data>
   <data name="Add Car" xml:space="preserve">
@@ -138,11 +138,17 @@
   <data name="Car Ads" xml:space="preserve">
     <value>Auto Oglasi</value>
   </data>
+  <data name="Cars" xml:space="preserve">
+    <value>Automobili</value>
+  </data>
   <data name="Contact" xml:space="preserve">
     <value>Kontakt</value>
   </data>
   <data name="Description:" xml:space="preserve">
     <value>Opis:</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detalji</value>
   </data>
   <data name="Email address:" xml:space="preserve">
     <value>Email adresa:</value>
@@ -183,8 +189,14 @@
   <data name="New Admin" xml:space="preserve">
     <value>Novi Admin</value>
   </data>
+  <data name="Next" xml:space="preserve">
+    <value>Sledeće</value>
+  </data>
   <data name="Phone:" xml:space="preserve">
     <value>Telefon:</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Prethodno</value>
   </data>
   <data name="Price:" xml:space="preserve">
     <value>Cena:</value>
