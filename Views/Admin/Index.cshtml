@@ -1,5 +1,9 @@
-﻿@{
-    ViewBag.TitleSufix = "Admin Page";
+﻿@using CarAds
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewBag.TitleSufix = @Localizer["Admin Page"];
     ViewBag.Admin = true;
 }
 

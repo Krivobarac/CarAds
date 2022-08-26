@@ -1,5 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
-
+@using CarAds
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@inject IStringLocalizer<SharedResource> Localizer
 @inject SignInManager<IdentityUser> SignInManager
 
 <!DOCTYPE html>
@@ -31,16 +34,16 @@
                 <div class="collapse navbar-collapse flex-grow-1">
                     <ul class="navbar-nav justify-content-between ms-auto mt-4 mb-3 mt-sm-0 mb-sm-0">
                         <li class="nav-item m-auto">
-                            @Html.ActionLink("Home", @ViewBag.IndexAction as String, @ViewBag.Homecontroller as String, null, new { @class = "nav-link d-inline" });
+                            @Html.ActionLink(@Localizer["Home"], @ViewBag.IndexAction as String, @ViewBag.Homecontroller as String, null, new { @class = "nav-link d-inline" });
                         </li>
                         <li class="nav-item m-auto">
-                            @Html.ActionLink("Contact", @ViewBag.IndexAction as String, @ViewBag.ContactController as String, null,  new { @class = "nav-link d-inline" });
+                            @Html.ActionLink(@Localizer["Contact"], @ViewBag.IndexAction as String, @ViewBag.ContactController as String, null,  new { @class = "nav-link d-inline" });
                         </li>
                         <li class="nav-item m-auto">
-                            @Html.ActionLink("About us", @ViewBag.IndexAction as String, @ViewBag.AboutUsController as String, null, new { @class = "nav-link d-inline" });
+                            @Html.ActionLink(@Localizer["About Us"], @ViewBag.IndexAction as String, @ViewBag.AboutUsController as String, null, new { @class = "nav-link d-inline" });
                         </li>
                         <li class="nav-item m-auto">
-                            @Html.ActionLink("Add Car", @ViewBag.AddCarAction as String, @ViewBag.CarControoler as String, null, new { @class = "nav-link d-inline" });
+                            @Html.ActionLink(@Localizer["Add Car"], @ViewBag.AddCarAction as String, @ViewBag.CarControoler as String, null, new { @class = "nav-link d-inline" });
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
@@ -48,11 +51,11 @@
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">@User.Identity.Name</a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item m-auto">
-                                        <a class="nav-link text-dark text-nowrap" id="register" asp-area="Identity" asp-page="/Account/Register">New Admin</a>
+                                        <a class="nav-link text-dark text-nowrap" id="register" asp-area="Identity" asp-page="/Account/Register">@Localizer["New Admin"]</a>
                                     </li>
                                     <li class="nav-item m-auto">
                                         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                                            <button type="submit" class="nav-link text-dark bg-transparent border-0 pe-0">Logout</button>
+                                            <button type="submit" class="nav-link text-dark bg-transparent border-0 pe-0">@Localizer["Logout"]</button>
                                         </form>
                                     </li>
                                 </ul>
@@ -65,6 +68,21 @@
                                 </form>
                             </li>
                         }
+                        <li class="nav-item">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">@(CultureInfo.CurrentCulture.Name.Split("-")[0])</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item m-auto text-dark">
+                                        @Html.ActionLink("en", "SetCulture", "Home", new { culture = "en", sourceUrl = @Context.Request.Path }, new { @class = "nav-link text-dark"})
+                                </li>
+                                <li class="nav-item m-auto">
+                                        @Html.ActionLink("sr", "SetCulture", "Home", new { culture = "sr", sourceUrl = @Context.Request.Path }, new { @class = "nav-link text-dark"})
+                                </li>
+                                <li class="nav-item m-auto">
+                                        @Html.ActionLink("de", "SetCulture", "Home", new { culture = "de-DE", sourceUrl = @Context.Request.Path }, new { @class = "nav-link text-dark"})
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -91,13 +109,13 @@
 
                 <ul class="nav col-12 col-md-4 justify-content-center justify-content-md-end">
                   <li class="nav-item">
-                    @Html.ActionLink("Home", @ViewBag.IndexAction as String, @ViewBag.Homecontroller as String, null, new { @class = "nav-link px-2 text-muted d-inline" })
+                        @Html.ActionLink(@Localizer["Home"], @ViewBag.IndexAction as String, @ViewBag.Homecontroller as String, null, new { @class = "nav-link px-2 text-muted d-inline" })
                   </li>
                   <li class="nav-item">
-                    @Html.ActionLink("Contact", @ViewBag.IndexAction as String, @ViewBag.ContactController as String, null, new { @class = "nav-link px-2 text-muted d-inline" })
+                        @Html.ActionLink(@Localizer["Contact"], @ViewBag.IndexAction as String, @ViewBag.ContactController as String, null, new { @class = "nav-link px-2 text-muted d-inline" })
                   </li>
                   <li class="nav-item">
-                    @Html.ActionLink("About Us", @ViewBag.IndexAction as String, @ViewBag.AboutUsController as String, null, new { @class = "nav-link px-2 text-muted d-inline" })
+                        @Html.ActionLink(@Localizer["About Us"], @ViewBag.IndexAction as String, @ViewBag.AboutUsController as String, null, new { @class = "nav-link px-2 text-muted d-inline" })
                   </li>
                 </ul>
             </div>
@@ -107,6 +125,12 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        $(function () {
+            $('.selectpicker').selectpicker();
+        });
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
